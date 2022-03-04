@@ -1,10 +1,10 @@
 #include <iostream>
 #include <string>
-#include "Character.h"
+#include "Group.h"
 
 
 int main() {
-
+	displayTitle();
 
 	return 0;
 }
