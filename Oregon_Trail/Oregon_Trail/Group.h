@@ -5,7 +5,7 @@
 
 using namespace std;
 
-class Character {
+class CharacterNode {
 private:
 	int hunger;
 	int thirst;
@@ -24,13 +24,20 @@ public:
 
 	//Constructors
 	Character(string name, int hunger = 0, int thirst = 0, int health = 100);
+	Character();
 
 	//Display
 	void showStats();
+
+	//Node Pointers
+	CharacterNode* next;
+	CharacterNode* prev;
 };
 
 class Group {
 protected:
-	Character people[];
+	CharacterNode* head;
+public:
+	Group(int);
 
 };
