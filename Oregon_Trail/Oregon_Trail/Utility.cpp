@@ -6,6 +6,10 @@
 
 using namespace std;
 
+/*
+* Function: get string
+* Condenses getting user input for a string with error checking into one function
+*/
 string getString() {
 	string temp;
 	cout << "Enter: ";

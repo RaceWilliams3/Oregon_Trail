@@ -39,6 +39,7 @@ protected:
 public:
 	Group();
 	void addCharacter();
+	void removeCharacter(int index);
 	void removeCharacter();
 	CharacterNode* getCharacter(int index = 0);
 	void groupStatus();
