@@ -23,8 +23,7 @@ public:
 	void setName(string name) { this->name = name; }
 
 	//Constructors
-	Character(string name, int hunger = 0, int thirst = 0, int health = 100);
-	Character();
+	CharacterNode(string name, int hunger = 0, int thirst = 0, int health = 100);
 
 	//Display
 	void showStats();
@@ -38,6 +37,10 @@ class Group {
 protected:
 	CharacterNode* head;
 public:
-	Group(int);
+	Group();
+	void addCharacter();
+	void removeCharacter();
+	CharacterNode* getCharacter(int index = 0);
+	void groupStatus();
 
 };
