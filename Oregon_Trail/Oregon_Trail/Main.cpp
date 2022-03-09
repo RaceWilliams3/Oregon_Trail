@@ -10,6 +10,9 @@ int main() {
 	wagon.addCharacter();
 	wagon.addCharacter();
 	wagon.groupStatus();
-	cout << "The second charcter namne is: " << wagon.getCharacter(1)->getName() << endl;
+	wagon.removeCharacter();
+	cout << "Deleted: " << endl;
+	wagon.groupStatus();
+
 	return 0;
 }

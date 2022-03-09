@@ -44,6 +44,17 @@ void Group::addCharacter() {
 	newNode->prev = cursor;
 }
 
+void Group::removeCharacter() {
+	CharacterNode* cursor = head;
+	while (cursor->next != NULL) {
+		cursor = cursor->next;
+	}
+	CharacterNode* tempPtr = cursor;
+	cursor = cursor->prev;
+	cursor->next = NULL;
+	delete tempPtr;
+}
+
 void Group::groupStatus() {
 	CharacterNode* cursor = head;
 	while (cursor->next != NULL) {
