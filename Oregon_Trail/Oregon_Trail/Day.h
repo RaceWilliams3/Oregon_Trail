@@ -21,4 +21,5 @@ public: //getters, setters, etc.
 	void setWater(int water);
 	string setDistWeather();
 	string setFoodWeather();
+	hinga;
 };
