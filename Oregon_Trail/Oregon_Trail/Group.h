@@ -36,6 +36,8 @@ public:
 class Group {
 protected:
 	CharacterNode* head;
+	int size;
+	double distance;
 public:
 	Group();
 	void addCharacter();
@@ -43,5 +45,7 @@ public:
 	void removeCharacter();
 	CharacterNode* getCharacter(int index = 0);
 	void groupStatus();
-
+	int getSize() { return size; }
+	double getDistance() { return distance; }
+	void setDistance(double dist) { distance += dist; }
 };
