@@ -37,6 +37,7 @@ void CharacterNode::showStats() {
 * the chain of the linked list.
 */
 Group::Group() {
+	size = 1;
 	this->head = new CharacterNode(getString());
 	head->next = NULL;
 	head->prev = NULL;
@@ -48,6 +49,7 @@ Group::Group() {
 * adds a new character with user selected name and default stats at  the end of list
 */
 void Group::addCharacter() {
+	++size;
 	CharacterNode* newNode = new CharacterNode(getString());
 	CharacterNode* cursor = head;
 	while (cursor->next != NULL) {
@@ -64,6 +66,7 @@ void Group::addCharacter() {
 * character of the list
 */
 void Group::removeCharacter() {
+	--size;
 	CharacterNode* cursor = head;
 	while (cursor->next != NULL) {
 		cursor = cursor->next;
@@ -82,6 +85,7 @@ void Group::removeCharacter() {
 * Counting starts at 0 just like an array
 */
 void Group::removeCharacter(int index) {
+	--size;
 	CharacterNode* cursor = head;
 	for (int i = 0; i < index; i++) {
 		cursor = cursor->next;
