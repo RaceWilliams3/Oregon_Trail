@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <string>
+#include "Group.h"
 using namespace std;
 
 class Day
@@ -10,16 +11,20 @@ protected:
 	int foodConsume;
 	int waterConsume;
 	int restCounter;
-	string foodWeather;
-	string distWeather;
+	string temp;
+	string weather;
+	string time;
+	Group* wagon;
 public: //getters, setters, etc.
+	static int days;
 	int getFood() { return foodConsume; }
 	int getWater() { return waterConsume; }
-	string getFoodWeather() { return foodWeather; }
-	string getDistWeather() { return distWeather; }
+	string getFoodWeather() { return temp; }
+	string getDistWeather() { return weather; }
 	void setFood(int food);
 	void setWater(int water);
-	string setDistWeather();
-	string setFoodWeather();
-	hinga;
+	void setWeather();
+	void setTemp();
+	void dayStatus();
+	Day(Group* wagon);
 };

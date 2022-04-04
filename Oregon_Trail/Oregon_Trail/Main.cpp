@@ -2,18 +2,25 @@
 #include <string>
 #include "Group.h"
 #include "Utility.h"
+#include "Day.h"
 
 using namespace std;
 
 int main() {
+	srand(time(NULL));
+
 	//Just testing of the functions
 	Group wagon;
-	wagon.addCharacter();
-	wagon.addCharacter();
-	wagon.groupStatus();
-	wagon.removeCharacter(1);
-	cout << "Deleted: " << endl;
-	wagon.groupStatus();
+	
+	cout << "---------" << endl;
+	try {
+			Day* day1 = new Day(&wagon);
+			day1->dayStatus();
+
+	}
+	catch (const char* x) {
+		cout << "ERROR: " << x << endl;
+	}
 
 	return 0;
 }

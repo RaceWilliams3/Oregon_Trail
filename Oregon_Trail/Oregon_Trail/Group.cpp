@@ -38,7 +38,8 @@ void CharacterNode::showStats() {
 */
 Group::Group() {
 	size = 1;
-	this->head = new CharacterNode(getString());
+	distance = 0;
+	this->head = new CharacterNode(getString("Enter Name:"));
 	head->next = NULL;
 	head->prev = NULL;
 
@@ -50,7 +51,7 @@ Group::Group() {
 */
 void Group::addCharacter() {
 	++size;
-	CharacterNode* newNode = new CharacterNode(getString());
+	CharacterNode* newNode = new CharacterNode(getString("Enter Name:"));
 	CharacterNode* cursor = head;
 	while (cursor->next != NULL) {
 		cursor = cursor->next;

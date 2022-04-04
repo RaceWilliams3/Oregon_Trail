@@ -1,62 +1,117 @@
+#pragma once
+
 #include <iostream>
 #include <string>
 #include "Day.h"
 using namespace std;
 
 
+int Day::days = 0;
 
-string Day::setFoodWeather()
+
+void Day::setTemp()
 {
-	int weather = 0;
-
-	srand(time(NULL));
-	weather = rand() % 3;
+	string h = "Hot";
+	string n = "Normal";
+	string c = "Cold";
+	int num = 0;
+	num = rand() % 3;
 	// switch statement for weather
-	switch (weather)
+	switch (num)
 	{
 	case 0:
-		Day::foodWeather = "Hot";
+		temp = h;
 		break;
 	case 1:
-		Day::foodWeather = "Cold";
+		temp = n;
 		break;
 	case 2:
-		Day::foodWeather = "Normal";
+		temp = c;
 		break;
 	}
-	return Day::foodWeather;
 }
 
-string Day::setDistWeather()
+void Day::setWeather()
 {
-	int weather = 0;
+	string w = "Calm Winds";
+	string g = "Gusty";
+	string s = "Stormy";
+	int num = 0;
 
-	weather = rand() % 3;
+	num = rand() % 3;
 
-	switch (weather)
+	switch (num)
 	{
 	case 0:
-		Day::distWeather = "Calm Winds";
+		this->weather = w;
 		break;
 	case 1:
-		Day::distWeather = "Gusty";
+		this->weather = g;
 		break;
 	case 2:
-		Day::distWeather = "Stormy";
+		this->weather = s;
 		break;
 	}
-	return Day::distWeather;
 }
 
 void Day::setFood(int food)
 {
 	if (Day::getFoodWeather() == "Calm Winds")
 	{
-		Day::foodConsume = 
+		Day::foodConsume = 0;
 	}
 }
 
 void Day::setWater(int water)
 {
-
+	
 }
+
+Day::Day(Group* wagon) {
+	days++;
+	this->wagon = wagon;
+
+	double dist = 0;
+	if (wagon->getSize() > 0) //group of people > 0
+	{
+		setTemp();
+		setWeather();
+	}
+	else {
+		throw ("Empty Group");
+		delete this;
+	}
+}
+
+void Day::dayStatus() {
+	cout << "Day " << days << endl;
+	cout << "Weather: " << weather << endl;
+	cout << "Temp: " << temp << endl;
+	wagon->groupStatus();
+}
+
+
+/* use for the travel function 
+//checking weather conditions
+		this->setDistWeather();
+
+		//Distance Travelled (between 15-50mi, depending on weather2)
+		if (this->getDistWeather() == "Calm Winds")
+		{
+			(dist += (40.0 + (rand() % (11))));
+			wagon->setDistance(dist);
+		}
+		else if (this->getDistWeather() == "Gusty")
+		{
+			dist += (25.0 + (rand() % (11)));
+			wagon->setDistance(dist);
+		}
+		else
+		{
+			dist += (15.0 + (rand() % (11)));
+			wagon->setDistance(dist);
+		}
+
+
+
+*/

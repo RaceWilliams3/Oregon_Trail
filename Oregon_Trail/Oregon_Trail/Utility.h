@@ -5,4 +5,4 @@
 
 using namespace std;
 
-string getString();
+string getString(const char* request);

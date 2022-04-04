@@ -24,9 +24,6 @@
     <ClCompile Include="Utility.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TravelMechanics.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Day.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
