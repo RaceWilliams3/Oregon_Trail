@@ -234,5 +234,6 @@ _Pvt_Extensions
 
 # FAKE - F# Make
 .fake/
-Oregon_Trail/.vs/Oregon_Trail/v17/Browse.VC.db
+.VC.db
+*.db
 *.db
