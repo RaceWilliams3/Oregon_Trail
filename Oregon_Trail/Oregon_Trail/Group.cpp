@@ -39,7 +39,7 @@ void CharacterNode::showStats() {
 Group::Group() {
 	size = 1;
 	distance = 0;
-	this->head = new CharacterNode(getString("Enter Name:"));
+	this->head = new CharacterNode(getString("Enter Name: "));
 	head->next = NULL;
 	head->prev = NULL;
 

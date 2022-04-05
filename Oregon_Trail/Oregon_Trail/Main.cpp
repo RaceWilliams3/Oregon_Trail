@@ -2,12 +2,15 @@
 #include <string>
 #include "Group.h"
 #include "Utility.h"
+#include "Title.h"
 #include "Day.h"
 
 using namespace std;
 
 int main() {
 	srand(time(NULL));
+
+	titleScreen();
 
 	//Just testing of the functions
 	Group wagon;
