@@ -235,4 +235,8 @@ _Pvt_Extensions
 # FAKE - F# Make
 .fake/
 Oregon_Trail/.vs/Oregon_Trail/v17/Browse.VC.db
+<<<<<<< HEAD
 Oregon_Trail/.vs/Oregon_Trail/v17/Browse.VC.db
+=======
+*.db
+>>>>>>> 80d96f4f7cba8586e0142df5d34ab9e6439b132c
