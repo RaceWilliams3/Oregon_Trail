@@ -319,6 +319,7 @@ paket-files/
 
 # FAKE - F# Make
 .fake/
+<<<<<<< HEAD
 
 # CodeRush personal settings
 .cr/personal
@@ -396,3 +397,8 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+=======
+.VC.db
+*.db
+*.db
+>>>>>>> f6abd722c3ac581b6b2c03f4fc5057b9b08a8ae4
