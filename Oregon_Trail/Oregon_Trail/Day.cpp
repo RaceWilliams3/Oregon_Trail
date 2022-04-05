@@ -108,19 +108,21 @@ void Day::eat() {
 		cout << "Greater number that current rations entered, using the max amount instead." << endl;
 		rat = (wagon->getRations() / wagon->getSize());
 	}
-	CharacterNode* cursor = wagon->head;
+
+	cout << "------------------DEBUG----------------" << endl;
+
 	for (int i = 0; i < wagon->getSize(); i++) {
-		cursor->showStats();
-		cursor->setHunger((cursor->getHunger() - rat*10));
-		wagon->setRations(wagon->getRations() - rat);
-		if (cursor->getHunger() < 0) {
-			cursor->setHunger(0);
+		CharacterNode* psn = wagon->getCharacter(i);
+		psn->setHunger((psn->getHunger() - rat * 10));
+		if (psn->getHunger() < 0) {
+			psn->setHunger(0);
 		}
-		cursor = cursor->next;
-		
+		wagon->setRations(wagon->getRations() - rat);
 	}
+
 	cout << "Current Group Rations: " << wagon->getRations() << endl;
 	wagon->groupStatus();
+	cout << "------------------DEBUG----------------" << endl;
 }
 
 void Day::travel() {
