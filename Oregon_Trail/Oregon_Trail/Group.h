@@ -35,14 +35,17 @@ public:
 
 class Group {
 protected:
-	CharacterNode* head;
 	int size;
 	double distance;
+	int rations;
 public:
+	CharacterNode* head;
 	Group();
 	void addCharacter();
 	void removeCharacter(int index);
 	void removeCharacter();
+	int getRations() { return rations; }
+	void setRations(int r) { rations = r; }
 	CharacterNode* getCharacter(int index = 0);
 	void groupStatus();
 	int getSize() { return size; }

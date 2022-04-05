@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include "Day.h"
+#include "Group.h";
 using namespace std;
 
 
@@ -56,7 +57,7 @@ void Day::setWeather()
 
 void Day::setFood(int food)
 {
-	if (Day::getFoodWeather() == "Calm Winds")
+	if (Day::getWeather() == "Calm Winds")
 	{
 		Day::foodConsume = 0;
 	}
@@ -76,6 +77,7 @@ Day::Day(Group* wagon) {
 	{
 		setTemp();
 		setWeather();
+		time = 0;
 	}
 	else {
 		throw ("Empty Group");
@@ -90,28 +92,37 @@ void Day::dayStatus() {
 	wagon->groupStatus();
 }
 
+void Day::eat() {
+	cout << "Current Group Rations: " << wagon->getRations() << endl;
+	cout << "How many Rations per person do you want to eat: ";
+	int rat = 0;
+	cin >> rat;
+	while (!cin) {
+		cout << "ERROR: Bad Input Try Again: ";
+		cin.clear();
+		cin.ignore(INT_MAX, '\n');
+		cin >> rat;
+	}
 
-/* use for the travel function 
-//checking weather conditions
-		this->setDistWeather();
-
-		//Distance Travelled (between 15-50mi, depending on weather2)
-		if (this->getDistWeather() == "Calm Winds")
-		{
-			(dist += (40.0 + (rand() % (11))));
-			wagon->setDistance(dist);
+	if (rat > (wagon->getRations()/wagon->getSize())) {
+		cout << "Greater number that current rations entered, using the max amount instead." << endl;
+		rat = (wagon->getRations() / wagon->getSize());
+	}
+	CharacterNode* cursor = wagon->head;
+	for (int i = 0; i < wagon->getSize(); i++) {
+		cursor->showStats();
+		cursor->setHunger((cursor->getHunger() - rat*10));
+		wagon->setRations(wagon->getRations() - rat);
+		if (cursor->getHunger() < 0) {
+			cursor->setHunger(0);
 		}
-		else if (this->getDistWeather() == "Gusty")
-		{
-			dist += (25.0 + (rand() % (11)));
-			wagon->setDistance(dist);
-		}
-		else
-		{
-			dist += (15.0 + (rand() % (11)));
-			wagon->setDistance(dist);
-		}
+		cursor = cursor->next;
+		
+	}
+	cout << "Current Group Rations: " << wagon->getRations() << endl;
+	wagon->groupStatus();
+}
 
-
-
-*/
+void Day::travel() {
+	
+}
