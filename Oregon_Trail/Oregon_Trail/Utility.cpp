@@ -15,9 +15,9 @@ string getString(const char* request) {
 	cout << request;
 	cin >> temp;
 	while (!cin) {
-		cout << "ERROR - Bad input try again: ";
-		cin.ignore(INT_MAX, '\n');
+		cout << "ERROR: Bad input try again: ";
 		cin.clear();
+		cin.ignore(INT_MAX, '\n');
 		cin >> temp;
 	}
 	return temp;

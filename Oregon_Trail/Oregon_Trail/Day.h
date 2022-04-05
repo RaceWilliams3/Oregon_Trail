@@ -13,18 +13,20 @@ protected:
 	int restCounter;
 	string temp;
 	string weather;
-	string time;
+	int time;
 	Group* wagon;
 public: //getters, setters, etc.
 	static int days;
 	int getFood() { return foodConsume; }
 	int getWater() { return waterConsume; }
-	string getFoodWeather() { return temp; }
-	string getDistWeather() { return weather; }
+	string getTemp() { return temp; }
+	string getWeather() { return weather; }
 	void setFood(int food);
 	void setWater(int water);
 	void setWeather();
 	void setTemp();
 	void dayStatus();
+	void eat();
+	void travel();
 	Day(Group* wagon);
 };

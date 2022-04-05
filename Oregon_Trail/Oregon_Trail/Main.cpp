@@ -17,8 +17,13 @@ int main() {
 	
 	cout << "---------" << endl;
 	try {
-			Day* day1 = new Day(&wagon);
-			day1->dayStatus();
+			Day* day = new Day(&wagon);
+			wagon.addCharacter();
+			wagon.getCharacter(0)->setHunger(100);
+			wagon.getCharacter(1)->setHunger(100);
+			wagon.setRations(100);
+			day->dayStatus();
+			day->eat();
 
 	}
 	catch (const char* x) {
