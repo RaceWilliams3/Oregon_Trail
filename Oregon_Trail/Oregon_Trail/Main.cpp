@@ -9,22 +9,32 @@ using namespace std;
 
 int main() {
 	srand(time(NULL));
+	int userInput;
 
 	titleScreen();
 
 	//Just testing of the functions
+	cout << "How many characters are in the wagon?: ";
+	cin >> userInput;
+	while (!cin)
+	{
+		cout << "ERROR: Invalid input, please try again: ";
+		cin.clear();
+		cin.ignore(INT_MAX, '\n');
+		cin >> userInput;
+	}
 	Group wagon;
-	
-	cout << "---------" << endl;
-	try {
-			Day* day = new Day(&wagon);
-			wagon.addCharacter();
-			wagon.getCharacter(0)->setHunger(100);
-			wagon.getCharacter(1)->setHunger(100);
-			wagon.setRations(100);
-			day->dayStatus();
-			day->eat();
 
+	try {
+		Day* day = new Day(&wagon);
+		for (int i = 1; i < userInput; ++i)
+		{
+			wagon.addCharacter();
+			wagon.getCharacter(i)->setHunger(100);
+		}
+		wagon.setRations(100);
+		day->dayStatus();
+		day->eat();
 	}
 	catch (const char* x) {
 		cout << "ERROR: " << x << endl;

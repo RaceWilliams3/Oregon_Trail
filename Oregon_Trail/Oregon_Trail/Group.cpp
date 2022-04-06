@@ -37,6 +37,7 @@ void CharacterNode::showStats() {
 * the chain of the linked list.
 */
 Group::Group() {
+	string name[20];
 	size = 1;
 	distance = 0;
 	this->head = new CharacterNode(getString("Enter Name: "));
@@ -51,7 +52,7 @@ Group::Group() {
 */
 void Group::addCharacter() {
 	++size;
-	CharacterNode* newNode = new CharacterNode(getString("Enter Name:"));
+	CharacterNode* newNode = new CharacterNode(getString("Enter Name: "));
 	CharacterNode* cursor = head;
 	while (cursor->next != NULL) {
 		cursor = cursor->next;
