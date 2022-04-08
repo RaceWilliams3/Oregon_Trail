@@ -55,18 +55,6 @@ void Day::setWeather()
 	}
 }
 
-void Day::setFood(int food)
-{
-	if (Day::getWeather() == "Calm Winds")
-	{
-		Day::foodConsume = 0;
-	}
-}
-
-void Day::setWater(int water)
-{
-	
-}
 
 Day::Day(Group* wagon) {
 	days++;
@@ -108,9 +96,6 @@ void Day::eat() {
 		cout << "Greater number that current rations entered, using the max amount instead." << endl;
 		rat = (wagon->getRations() / wagon->getSize());
 	}
-
-	cout << "------------------DEBUG----------------" << endl;
-
 	for (int i = 0; i < wagon->getSize(); i++) {
 		CharacterNode* psn = wagon->getCharacter(i);
 		psn->setHunger((psn->getHunger() - rat * 10));
@@ -119,12 +104,31 @@ void Day::eat() {
 		}
 		wagon->setRations(wagon->getRations() - rat);
 	}
-
 	cout << "Current Group Rations: " << wagon->getRations() << endl;
 	wagon->groupStatus();
-	cout << "------------------DEBUG----------------" << endl;
 }
 
 void Day::travel() {
+	if (weather == "Calm Winds") {
+		double dist = (rand() % 50) + 50;
+	}
+	else if (weather == "Gusty") {
+		double dist = (rand() % 30) + 30;
+	}
+	else {
+		double dist = (rand() % 10) + 10;
+	}
+
+	if (temp == "Hot") {
+		foodConsume += (rand() % 50) + 50;
+	}
+	else if (temp == "Normal") {
+		foodConsume += (rand() % 30) + 30;
+	}
+	else {
+		foodConsume += (rand() % 10) + 10;
+	}
+
+
 	
 }
