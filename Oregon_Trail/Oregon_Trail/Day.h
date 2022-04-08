@@ -12,7 +12,7 @@ protected:
 	int restCounter;
 	string temp;
 	string weather;
-	int time;
+	int Time;
 	Group* wagon;
 public: //getters, setters, etc.
 	static int days;
@@ -24,5 +24,6 @@ public: //getters, setters, etc.
 	void dayStatus();
 	void eat();
 	void travel();
+	void action();
 	Day(Group* wagon);
 };

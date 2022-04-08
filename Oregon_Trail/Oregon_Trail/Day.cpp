@@ -55,7 +55,6 @@ void Day::setWeather()
 	}
 }
 
-
 Day::Day(Group* wagon) {
 	days++;
 	this->wagon = wagon;
@@ -65,7 +64,7 @@ Day::Day(Group* wagon) {
 	{
 		setTemp();
 		setWeather();
-		time = 0;
+		Time = 0;
 	}
 	else {
 		throw ("Empty Group");
@@ -96,6 +95,9 @@ void Day::eat() {
 		cout << "Greater number that current rations entered, using the max amount instead." << endl;
 		rat = (wagon->getRations() / wagon->getSize());
 	}
+
+	cout << "------------------DEBUG----------------" << endl;
+
 	for (int i = 0; i < wagon->getSize(); i++) {
 		CharacterNode* psn = wagon->getCharacter(i);
 		psn->setHunger((psn->getHunger() - rat * 10));
@@ -104,31 +106,73 @@ void Day::eat() {
 		}
 		wagon->setRations(wagon->getRations() - rat);
 	}
+
 	cout << "Current Group Rations: " << wagon->getRations() << endl;
 	wagon->groupStatus();
+	cout << "------------------DEBUG----------------" << endl;
 }
 
-void Day::travel() {
-	if (weather == "Calm Winds") {
-		double dist = (rand() % 50) + 50;
-	}
-	else if (weather == "Gusty") {
-		double dist = (rand() % 30) + 30;
-	}
-	else {
-		double dist = (rand() % 10) + 10;
-	}
+void Day::travel() 
+{
+	srand(time(NULL));
 
-	if (temp == "Hot") {
-		foodConsume += (rand() % 50) + 50;
-	}
-	else if (temp == "Normal") {
-		foodConsume += (rand() % 30) + 30;
-	}
-	else {
-		foodConsume += (rand() % 10) + 10;
-	}
+}
 
+void Day::action()
+{
+	string userInput;
+	int dayTime;
+	Day::Time = 0;
 
-	
+	while (Day::Time < 2)
+	{
+		cout << "----------" << endl;
+		dayTime = Day::Time % 2;
+
+		switch (dayTime)
+		{
+		case 0:
+			cout << "MORNING: " << endl;
+			++Day::Time;
+			break;
+		case 1:
+			cout << "AFTERNOON: " << endl;
+			++Day::Time;
+			break;
+		}
+
+		cout << "Eat, Hunt, Travel or Rest?: ";
+		cin >> userInput;
+		while (!cin)
+		{
+			cout << "ERROR: Not a string." << endl;
+			cin.clear();
+			cin.ignore(INT_MAX, '\n');
+			cin >> userInput;
+		}
+
+		if (userInput == "eat" || userInput == "Eat")
+		{
+			Day::eat();
+		}
+		else if (userInput == "hunt" || userInput == "Hunt")
+		{
+			//Day::hunt();
+		}
+		else if (userInput == "travel" || userInput == "Travel")
+		{
+			Day::travel();
+		}
+		else if (userInput == "rest" || userInput == "Rest")
+		{
+			//Day::rest();
+		}
+		else
+		{
+			cout << "Invalid Input, please try again." << endl;
+			cin.clear();
+			cin.ignore(INT_MAX, '\n');
+			cin >> userInput;
+		}
+	}
 }
