@@ -55,19 +55,6 @@ void Day::setWeather()
 	}
 }
 
-void Day::setFood(int food)
-{
-	if (Day::getWeather() == "Calm Winds")
-	{
-		Day::foodConsume = 0;
-	}
-}
-
-void Day::setWater(int water)
-{
-	
-}
-
 Day::Day(Group* wagon) {
 	days++;
 	this->wagon = wagon;
@@ -77,7 +64,7 @@ Day::Day(Group* wagon) {
 	{
 		setTemp();
 		setWeather();
-		time = 0;
+		Time = 0;
 	}
 	else {
 		throw ("Empty Group");
@@ -125,6 +112,67 @@ void Day::eat() {
 	cout << "------------------DEBUG----------------" << endl;
 }
 
-void Day::travel() {
-	
+void Day::travel() 
+{
+	srand(time(NULL));
+
+}
+
+void Day::action()
+{
+	string userInput;
+	int dayTime;
+	Day::Time = 0;
+
+	while (Day::Time < 2)
+	{
+		cout << "----------" << endl;
+		dayTime = Day::Time % 2;
+
+		switch (dayTime)
+		{
+		case 0:
+			cout << "MORNING: " << endl;
+			++Day::Time;
+			break;
+		case 1:
+			cout << "AFTERNOON: " << endl;
+			++Day::Time;
+			break;
+		}
+
+		cout << "Eat, Hunt, Travel or Rest?: ";
+		cin >> userInput;
+		while (!cin)
+		{
+			cout << "ERROR: Not a string." << endl;
+			cin.clear();
+			cin.ignore(INT_MAX, '\n');
+			cin >> userInput;
+		}
+
+		if (userInput == "eat" || userInput == "Eat")
+		{
+			Day::eat();
+		}
+		else if (userInput == "hunt" || userInput == "Hunt")
+		{
+			//Day::hunt();
+		}
+		else if (userInput == "travel" || userInput == "Travel")
+		{
+			Day::travel();
+		}
+		else if (userInput == "rest" || userInput == "Rest")
+		{
+			//Day::rest();
+		}
+		else
+		{
+			cout << "Invalid Input, please try again." << endl;
+			cin.clear();
+			cin.ignore(INT_MAX, '\n');
+			cin >> userInput;
+		}
+	}
 }

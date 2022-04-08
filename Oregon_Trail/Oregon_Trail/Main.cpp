@@ -34,11 +34,13 @@ int main() {
 		}
 		wagon.setRations(100);
 		day->dayStatus();
-		day->eat();
+
+		day->action();
 	}
 	catch (const char* x) {
 		cout << "ERROR: " << x << endl;
 	}
+
 
 	return 0;
 }
