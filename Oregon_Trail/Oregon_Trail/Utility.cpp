@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include "Utility.h"
+#include "Group.h"
 
 using namespace std;
 
@@ -23,20 +24,28 @@ string getString(const char* request) {
 	return temp;
 }
 
-/*
-template <class t>
-t randRange(t low, t high) {
-	high++;
-	return (rand() % (high - low)) + low;
+
+int getInt(const char* request) {
+	int temp;
+	cout << request;
+	cin >> temp;
+	while (!cin) {
+		cout << "ERROR: Bad input try again: ";
+		cin.clear();
+		cin.ignore(INT_MAX, '\n');
+		cin >> temp;
+	}
+	return temp;
 }
-*/
 
 int randRange(int low, int high) {
 	high++;
 	return (rand() % (high - low)) + low;
 }
 
-//double randRange(double low, double high) {
-//	high++;
-//	return (rand() % (high - low)) + low;
-//}
+void injuryChance(CharacterNode* psn, int chance, int lowDamage, int highDamage,string injury) {
+	if (randRange(0, 100) > (100-chance)) {
+		cout << psn->getName() << " got hurt " << injury << endl;
+		psn->setHealth(psn->getHealth() - randRange(lowDamage, highDamage));
+	}
+}

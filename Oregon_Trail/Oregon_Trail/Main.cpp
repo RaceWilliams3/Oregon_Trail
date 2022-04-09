@@ -30,10 +30,9 @@ int main() {
 		{
 			wagon.addCharacter();
 		}
-		wagon.setRations(100);
 		day->dayStatus();
 
-		day->action();
+		day->action(&wagon);
 	}
 	catch (const char* x) {
 		cout << "ERROR: " << x << endl;

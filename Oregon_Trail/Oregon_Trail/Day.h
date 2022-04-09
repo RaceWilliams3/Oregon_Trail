@@ -26,6 +26,7 @@ public: //getters, setters, etc.
 	void dayStatus();
 	void eat();
 	void travel();
-	void action();
+	void hunt();
+	void action(Group* wagon);
 	Day(Group* wagon);
 };

@@ -3,8 +3,8 @@
 #include <iostream>
 #include <string>
 #include "Day.h"
-#include "Group.h";
-#include "Utility.h";
+#include "Group.h"
+#include "Utility.h"
 using namespace std;
 
 
@@ -114,18 +114,44 @@ void Day::travel()
 	}
 
 	for (int i = 0; i < wagon->getSize(); i++) {
-		if (randRange(0, 100) > 90) {
-			CharacterNode* psn = wagon->getCharacter(i);
-			cout << psn->getName() << " got hurt!" << endl;
-			psn->setHealth(psn->getHealth() - randRange(5,10));
-		}
+		injuryChance(wagon->getCharacter(i), 10, 5, 10,"traveling");
 	}
 
 
 	wagon->groupStatus();
 }
 
-void Day::action()
+void Day::hunt() {
+	bool goodName = false;
+	CharacterNode* hunter = wagon->head;
+	goodName = false;
+	while (goodName == false) {
+		string tName = getString("Who do you want to send hunting? ");
+		for (int i = 0; i < wagon->getSize(); i++) {
+			if (tName == wagon->getCharacter(i)->getName()) {
+				hunter = wagon->getCharacter(i);
+				goodName = true;
+			}
+		}
+		if (goodName == false) {
+			cout << "That person is not in the group, try again. " << endl;
+		}
+	}
+	injuryChance(hunter, 50, 10, 50, "hunting");
+	if (randRange(0, 100) < 75) {
+		int food = randRange(2, 10);
+		int tRations = food * randRange(4, 6);
+		cout << hunter->getName() << " was able to get " << food << " lbs of food!" << endl;
+		cout << "they made " << tRations << " rations" << endl;
+		wagon->setRations(wagon->getRations() + tRations);
+
+	}
+	else {
+		cout << hunter->getName() << " was not able to get any food." << endl;
+	}
+}
+
+void Day::action(Group* wagon)
 {
 	string userInput;
 	int dayTime;
@@ -148,7 +174,7 @@ void Day::action()
 			break;
 		}
 
-		cout << "Eat, Hunt, Travel or Rest?: ";
+		cout << "Eat, Hunt, Travel, Rest or Status?: ";
 		cin >> userInput;
 		while (!cin)
 		{
@@ -164,7 +190,7 @@ void Day::action()
 		}
 		else if (userInput == "hunt" || userInput == "Hunt")
 		{
-			//Day::hunt();
+			Day::hunt();
 		}
 		else if (userInput == "travel" || userInput == "Travel")
 		{
@@ -173,6 +199,10 @@ void Day::action()
 		else if (userInput == "rest" || userInput == "Rest")
 		{
 			//Day::rest();
+		}
+		else if (userInput == "status" || userInput == "Status")
+		{
+			wagon->groupStatus();
 		}
 		else
 		{

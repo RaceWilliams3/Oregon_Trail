@@ -37,6 +37,7 @@ void CharacterNode::showStats() {
 * the chain of the linked list.
 */
 Group::Group() {
+	rations = 50;
 	string name[20];
 	size = 1;
 	distance = 0;
