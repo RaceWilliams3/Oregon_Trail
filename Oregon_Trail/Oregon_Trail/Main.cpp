@@ -8,12 +8,11 @@
 using namespace std;
 
 int main() {
+	//Seed Random one at the begining of the game
 	srand(time(NULL));
-	int userInput;
-
 	titleScreen();
 
-	//Just testing of the functions
+	int userInput;
 	cout << "How many characters are in the wagon?: ";
 	cin >> userInput;
 	while (!cin)
@@ -30,7 +29,6 @@ int main() {
 		for (int i = 1; i < userInput; ++i)
 		{
 			wagon.addCharacter();
-			wagon.getCharacter(i)->setHunger(100);
 		}
 		wagon.setRations(100);
 		day->dayStatus();

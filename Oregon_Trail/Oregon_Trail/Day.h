@@ -10,15 +10,17 @@ class Day
 protected:
 	int foodConsume;
 	int restCounter;
-	string temp;
-	string weather;
+	string temps[3] = { "Cold", "Normal", "Hot" };
+	string weathers[3] = { "Calm", "Gusty", "Stormy"};
+	int temp;
+	int weather;
 	int Time;
 	Group* wagon;
 public: //getters, setters, etc.
 	static int days;
 	int getFood() { return foodConsume; }
-	string getTemp() { return temp; }
-	string getWeather() { return weather; }
+	string getTemp() { return temps[temp]; }
+	string getWeather() { return weathers[weather]; }
 	void setWeather();
 	void setTemp();
 	void dayStatus();

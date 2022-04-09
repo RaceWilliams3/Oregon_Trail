@@ -22,3 +22,21 @@ string getString(const char* request) {
 	}
 	return temp;
 }
+
+/*
+template <class t>
+t randRange(t low, t high) {
+	high++;
+	return (rand() % (high - low)) + low;
+}
+*/
+
+int randRange(int low, int high) {
+	high++;
+	return (rand() % (high - low)) + low;
+}
+
+//double randRange(double low, double high) {
+//	high++;
+//	return (rand() % (high - low)) + low;
+//}

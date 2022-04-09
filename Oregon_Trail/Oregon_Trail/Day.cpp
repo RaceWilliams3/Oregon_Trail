@@ -4,6 +4,7 @@
 #include <string>
 #include "Day.h"
 #include "Group.h";
+#include "Utility.h";
 using namespace std;
 
 
@@ -12,47 +13,12 @@ int Day::days = 0;
 
 void Day::setTemp()
 {
-	string h = "Hot";
-	string n = "Normal";
-	string c = "Cold";
-	int num = 0;
-	num = rand() % 3;
-	// switch statement for weather
-	switch (num)
-	{
-	case 0:
-		temp = h;
-		break;
-	case 1:
-		temp = n;
-		break;
-	case 2:
-		temp = c;
-		break;
-	}
+	temp = randRange(0, 2);
 }
 
 void Day::setWeather()
 {
-	string w = "Calm Winds";
-	string g = "Gusty";
-	string s = "Stormy";
-	int num = 0;
-
-	num = rand() % 3;
-
-	switch (num)
-	{
-	case 0:
-		this->weather = w;
-		break;
-	case 1:
-		this->weather = g;
-		break;
-	case 2:
-		this->weather = s;
-		break;
-	}
+	weather = randRange(0, 2);
 }
 
 Day::Day(Group* wagon) {
@@ -74,8 +40,8 @@ Day::Day(Group* wagon) {
 
 void Day::dayStatus() {
 	cout << "Day " << days << endl;
-	cout << "Weather: " << weather << endl;
-	cout << "Temp: " << temp << endl;
+	cout << "Weather: " << weathers[weather] << endl;
+	cout << "Temp: " << temps[temp] << endl;
 	wagon->groupStatus();
 }
 
@@ -95,9 +61,6 @@ void Day::eat() {
 		cout << "Greater number that current rations entered, using the max amount instead." << endl;
 		rat = (wagon->getRations() / wagon->getSize());
 	}
-
-	cout << "------------------DEBUG----------------" << endl;
-
 	for (int i = 0; i < wagon->getSize(); i++) {
 		CharacterNode* psn = wagon->getCharacter(i);
 		psn->setHunger((psn->getHunger() - rat * 10));
@@ -109,13 +72,57 @@ void Day::eat() {
 
 	cout << "Current Group Rations: " << wagon->getRations() << endl;
 	wagon->groupStatus();
-	cout << "------------------DEBUG----------------" << endl;
 }
 
 void Day::travel() 
 {
-	srand(time(NULL));
+	int tDistance = 0;
+	switch (weather) {
+	case(0):
+		tDistance = randRange(50, 100);
+		wagon->setDistance(wagon->getDistance() + tDistance);
+		break;
+	case(1):
+		tDistance = randRange(30, 60);
+		wagon->setDistance(wagon->getDistance() + tDistance);
+		break;
+	case(2):
+		tDistance = randRange(10, 20);
+		wagon->setDistance(wagon->getDistance() + tDistance);
+		break;
+	}
+	cout << "You went " << tDistance << " miles." << endl;
+	int low = 0;
+	int high = 0;
+	switch (temp) {
+	case(0):
+		low = 10;
+		high = 20;
+		break;
+	case(1):
+		low = 5;
+		high = 15;
+		break;
+	case(2):
+		low = 15;
+		high = 30;
+		break;
+	}
+	for (int i = 0; i < wagon->getSize(); i++) {
+		CharacterNode* psn = wagon->getCharacter(i);
+		psn->setHunger(psn->getHunger() + randRange(low, high));
+	}
 
+	for (int i = 0; i < wagon->getSize(); i++) {
+		if (randRange(0, 100) > 90) {
+			CharacterNode* psn = wagon->getCharacter(i);
+			cout << psn->getName() << " got hurt!" << endl;
+			psn->setHealth(psn->getHealth() - randRange(5,10));
+		}
+	}
+
+
+	wagon->groupStatus();
 }
 
 void Day::action()
