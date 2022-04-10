@@ -12,6 +12,8 @@ int main() {
 	srand(time(NULL));
 	titleScreen();
 
+	int targetMiles = 2800;
+
 	int userInput;
 	cout << "How many characters are in the wagon?: ";
 	cin >> userInput;
@@ -23,20 +25,22 @@ int main() {
 		cin >> userInput;
 	}
 	Group wagon;
+	while (wagon.getDistance() < targetMiles) {
+		try {
+			Day* day = new Day(&wagon);
+			for (int i = 1; i < userInput; ++i)
+			{
+				wagon.addCharacter();
+			}
+			day->dayStatus();
 
-	try {
-		Day* day = new Day(&wagon);
-		for (int i = 1; i < userInput; ++i)
-		{
-			wagon.addCharacter();
+			day->action();
 		}
-		day->dayStatus();
-
-		day->action(&wagon);
+		catch (const char* x) {
+			cout << "ERROR: " << x << endl;
+		}
 	}
-	catch (const char* x) {
-		cout << "ERROR: " << x << endl;
-	}
+	
 
 
 	return 0;

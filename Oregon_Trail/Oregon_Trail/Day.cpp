@@ -151,7 +151,18 @@ void Day::hunt() {
 	}
 }
 
-void Day::action(Group* wagon)
+void Day::rest() {
+	for (int i = 0; i < wagon->getSize(); i++) {
+		CharacterNode* psn = wagon->getCharacter(i);
+		psn->setHealth(psn->getHealth() + randRange(15, 50));
+		if (psn->getHealth() > 100) {
+			psn->setHealth(100);
+		}		
+		psn->setHunger(psn->getHunger() + randRange(2,5));
+	}
+}
+
+void Day::action()
 {
 	string userInput;
 	int dayTime;
@@ -198,11 +209,7 @@ void Day::action(Group* wagon)
 		}
 		else if (userInput == "rest" || userInput == "Rest")
 		{
-			//Day::rest();
-		}
-		else if (userInput == "status" || userInput == "Status")
-		{
-			wagon->groupStatus();
+			Day::rest();
 		}
 		else
 		{
