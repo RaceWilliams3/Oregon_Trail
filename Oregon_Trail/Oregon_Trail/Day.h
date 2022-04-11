@@ -23,7 +23,6 @@ public: //getters, setters, etc.
 	string getWeather() { return weathers[weather]; }
 	void setWeather();
 	void setTemp();
-	void dayStatus();
 	void eat();
 	void travel();
 	void hunt();

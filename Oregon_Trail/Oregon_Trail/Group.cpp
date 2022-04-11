@@ -11,10 +11,9 @@ using namespace std;
 * Function: Character node constructor, 
 * just creates character with base values and name.
 */
-CharacterNode::CharacterNode(string name, int hunger, int thirst, int health) {
+CharacterNode::CharacterNode(string name, int hunger, int health) {
 	this->setName(name);
 	this->setHunger(hunger);
-	this->setThirst(thirst);
 	this->setHealth(health);
 }
 
@@ -23,12 +22,9 @@ CharacterNode::CharacterNode(string name, int hunger, int thirst, int health) {
 * displays all character stats in small block
 */
 void CharacterNode::showStats() {
-	cout << endl << "----------------------" << endl;
-	cout << name << " stats:" << endl;
+	cout << endl << name << " stats:" << endl;
 	cout << "Hunger level: " << hunger << endl;
-	cout << "Thirst level: " << thirst << endl;
-	cout << "Health: " << health << endl;
-	cout << "----------------------" << endl;
+	cout << "Health: " << health << endl << endl;
 }
 
 /*
@@ -37,6 +33,7 @@ void CharacterNode::showStats() {
 * the chain of the linked list.
 */
 Group::Group() {
+	targetMiles = 2800;
 	rations = 50;
 	string name[20];
 	size = 1;
@@ -65,38 +62,28 @@ void Group::addCharacter() {
 
 /*
 * Function: remove character
-* first version of two overloaded functions, the first one (when passed no arguments) removes the last
-* character of the list
-*/
-void Group::removeCharacter() {
-	--size;
-	CharacterNode* cursor = head;
-	while (cursor->next != NULL) {
-		cursor = cursor->next;
-	}
-	CharacterNode* tempPtr = cursor;
-	cursor = cursor->prev;
-	cursor->next = NULL;
-	delete tempPtr;
-}
-
-/*
-* Function: remove character
-* second version of the two overloaded functions, this one takes an index argument and
-* removes that character from the list. automatically deals with sealing up the 
+* this one takes an index argument and removes that character from the list. 
+* automatically deals with sealing up the 
 * hole in the list.
 * Counting starts at 0 just like an array
 */
+
+
+void d(int message) {
+	cout << "DEBUG: " << message << " success" << endl;
+}
+
 void Group::removeCharacter(int index) {
 	--size;
-	CharacterNode* cursor = head;
-	for (int i = 0; i < index; i++) {
-		cursor = cursor->next;
-	}
-	CharacterNode* tempPtr = cursor;
+	d(1);
+	CharacterNode* cursor = getCharacter(index);
+	d(2);
 	cursor->prev->next = cursor->next;
+	d(3);
 	cursor->next->prev = cursor->prev;
-	delete tempPtr;
+	d(4);
+	delete cursor;
+	d(5);
 }
 
 /*
@@ -104,6 +91,10 @@ void Group::removeCharacter(int index) {
 * display entire groups status in list format
 */
 void Group::groupStatus() {
+	cout << endl << "------- Group Status -------" << endl;
+	cout << "Miles done: " << distance << endl;
+	cout << "Miles left: " << targetMiles - distance << endl;
+	cout << "";
 	CharacterNode* cursor = head;
 	while (cursor->next != NULL) {
 		cursor->showStats();
@@ -123,4 +114,39 @@ CharacterNode* Group::getCharacter(int index) {
 		cursor = cursor->next;
 	}
 	return cursor;
+}
+
+void Group::checkDead() {
+	if (size <= 0) {
+		cout << "Everyone is dead." << endl;
+		cout << "You failed" << endl;
+	}
+	else {
+		/*for (int i = 0; i < size; i++) {
+			cout << "iteration: " << i << endl << "checking: " << getCharacter(i)->getName()  << endl;
+			if (getCharacter(i)->getHealth() <= 0 || getCharacter(i)->getHunger() >= 100) {
+				cout << getCharacter(i)->getName() << " died" << endl;
+				removeCharacter(i);
+			}
+			else {
+				cout << getCharacter(i)->getName() << " is good" << endl;
+			}
+		}*/
+
+		CharacterNode* cursor = head;
+		int i = 0;
+		while (cursor != NULL) {
+			cout << "iteration: " << i << endl << "checking: " << cursor->getName() << endl;
+			if (cursor->getHealth() <= 0 || cursor->getHunger() >= 100) {
+				cout << cursor->getName() << " died" << endl;
+				cursor = cursor->next;
+				removeCharacter(i);
+			}
+			else {
+				cursor = cursor->next;
+				cout << cursor->getName() << " is good" << endl;
+			}
+			i++;
+		}
+	}
 }

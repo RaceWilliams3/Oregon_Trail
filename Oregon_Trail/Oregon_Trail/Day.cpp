@@ -24,7 +24,8 @@ void Day::setWeather()
 Day::Day(Group* wagon) {
 	days++;
 	this->wagon = wagon;
-
+	cout << "Day " << days << endl;
+	cout << wagon->getTarget() - wagon->getDistance() << " miles left" << endl;
 	double dist = 0;
 	if (wagon->getSize() > 0) //group of people > 0
 	{
@@ -36,13 +37,8 @@ Day::Day(Group* wagon) {
 		throw ("Empty Group");
 		delete this;
 	}
-}
-
-void Day::dayStatus() {
-	cout << "Day " << days << endl;
 	cout << "Weather: " << weathers[weather] << endl;
 	cout << "Temp: " << temps[temp] << endl;
-	wagon->groupStatus();
 }
 
 void Day::eat() {
@@ -71,7 +67,6 @@ void Day::eat() {
 	}
 
 	cout << "Current Group Rations: " << wagon->getRations() << endl;
-	wagon->groupStatus();
 }
 
 void Day::travel() 
@@ -116,9 +111,6 @@ void Day::travel()
 	for (int i = 0; i < wagon->getSize(); i++) {
 		injuryChance(wagon->getCharacter(i), 10, 5, 10,"traveling");
 	}
-
-
-	wagon->groupStatus();
 }
 
 void Day::hunt() {
@@ -170,9 +162,7 @@ void Day::action()
 
 	while (Day::Time < 2)
 	{
-		cout << "----------" << endl;
 		dayTime = Day::Time % 2;
-
 		switch (dayTime)
 		{
 		case 0:
@@ -219,4 +209,6 @@ void Day::action()
 			cin >> userInput;
 		}
 	}
+	wagon->checkDead();
+	wagon->groupStatus();
 }
