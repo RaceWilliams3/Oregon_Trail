@@ -76,13 +76,17 @@ void d(int message) {
 void Group::removeCharacter(int index) {
 	--size;
 	d(1);
-	CharacterNode* cursor = getCharacter(index);
+	CharacterNode* c = getCharacter(index);
 	d(2);
-	cursor->prev->next = cursor->next;
+	if (c->prev != NULL) {
+		c->prev->next = c->next;
+	}
 	d(3);
-	cursor->next->prev = cursor->prev;
+	if (c->next != NULL) {
+		c->next->prev = c->prev;
+	}
 	d(4);
-	delete cursor;
+	free(c);
 	d(5);
 }
 
@@ -139,14 +143,16 @@ void Group::checkDead() {
 			cout << "iteration: " << i << endl << "checking: " << cursor->getName() << endl;
 			if (cursor->getHealth() <= 0 || cursor->getHunger() >= 100) {
 				cout << cursor->getName() << " died" << endl;
-				cursor = cursor->next;
+				
 				removeCharacter(i);
+				i++;
 			}
 			else {
-				cursor = cursor->next;
 				cout << cursor->getName() << " is good" << endl;
+				i++;
 			}
-			i++;
+			cursor = cursor->next;
+			
 		}
 	}
 }
