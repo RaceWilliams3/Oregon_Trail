@@ -43,7 +43,7 @@ int randRange(int low, int high) {
 	return (rand() % (high - low)) + low;
 }
 
-void injuryChance(CharacterNode* psn, int chance, int lowDamage, int highDamage,string injury) {
+void injuryChance(Character* psn, int chance, int lowDamage, int highDamage,string injury) {
 	if (randRange(0, 100) > (100-chance)) {
 		cout << psn->getName() << " got hurt " << injury << endl;
 		psn->setHealth(psn->getHealth() - randRange(lowDamage, highDamage));

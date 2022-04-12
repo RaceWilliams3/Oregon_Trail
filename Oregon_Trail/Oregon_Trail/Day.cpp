@@ -10,7 +10,6 @@ using namespace std;
 
 int Day::days = 0;
 
-
 void Day::setTemp()
 {
 	temp = randRange(0, 2);
@@ -27,7 +26,7 @@ Day::Day(Group* wagon) {
 	cout << "Day " << days << endl;
 	cout << wagon->getTarget() - wagon->getDistance() << " miles left" << endl;
 	double dist = 0;
-	if (wagon->getSize() > 0) //group of people > 0
+	if (wagon->people.size() > 0) //group of people > 0
 	{
 		setTemp();
 		setWeather();
@@ -53,12 +52,12 @@ void Day::eat() {
 		cin >> rat;
 	}
 
-	if (rat > (wagon->getRations()/wagon->getSize())) {
+	if (rat > (wagon->getRations()/wagon->people.size())) {
 		cout << "Greater number that current rations entered, using the max amount instead." << endl;
-		rat = (wagon->getRations() / wagon->getSize());
+		rat = (wagon->getRations() / wagon->people.size());
 	}
-	for (int i = 0; i < wagon->getSize(); i++) {
-		CharacterNode* psn = wagon->getCharacter(i);
+	for (int i = 0; i < wagon->people.size(); i++) {
+		Character* psn = &wagon->people[i];
 		psn->setHunger((psn->getHunger() - rat * 10));
 		if (psn->getHunger() < 0) {
 			psn->setHunger(0);
@@ -103,25 +102,25 @@ void Day::travel()
 		high = 30;
 		break;
 	}
-	for (int i = 0; i < wagon->getSize(); i++) {
-		CharacterNode* psn = wagon->getCharacter(i);
+	for (int i = 0; i < wagon->people.size(); i++) {
+		Character* psn = &wagon->people[i];
 		psn->setHunger(psn->getHunger() + randRange(low, high));
 	}
 
-	for (int i = 0; i < wagon->getSize(); i++) {
-		injuryChance(wagon->getCharacter(i), 10, 5, 10,"traveling");
+	for (int i = 0; i < wagon->people.size(); i++) {
+		injuryChance(&wagon->people[i], 10, 5, 10, "traveling");
 	}
 }
 
 void Day::hunt() {
 	bool goodName = false;
-	CharacterNode* hunter = wagon->head;
+	Character* hunter = &wagon->people[0];
 	goodName = false;
 	while (goodName == false) {
 		string tName = getString("Who do you want to send hunting? ");
-		for (int i = 0; i < wagon->getSize(); i++) {
-			if (tName == wagon->getCharacter(i)->getName()) {
-				hunter = wagon->getCharacter(i);
+		for (int i = 0; i < wagon->people.size(); i++) {
+			if (tName == wagon->people[i].getName()) {
+				hunter = &wagon->people[i];
 				goodName = true;
 			}
 		}
@@ -144,8 +143,8 @@ void Day::hunt() {
 }
 
 void Day::rest() {
-	for (int i = 0; i < wagon->getSize(); i++) {
-		CharacterNode* psn = wagon->getCharacter(i);
+	for (int i = 0; i < wagon->people.size(); i++) {
+		Character* psn = &wagon->people[i];
 		psn->setHealth(psn->getHealth() + randRange(15, 50));
 		if (psn->getHealth() > 100) {
 			psn->setHealth(100);

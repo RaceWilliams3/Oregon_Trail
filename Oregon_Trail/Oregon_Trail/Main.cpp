@@ -7,31 +7,8 @@
 
 using namespace std;
 
+
 int main() {
-
-	srand(time(NULL));
-	Group wagon;
-	wagon.addCharacter();
-	wagon.addCharacter();
-	wagon.addCharacter();
-	wagon.addCharacter();
-	wagon.groupStatus();
-	wagon.getCharacter(1)->setHealth(0);
-	wagon.getCharacter(2)->setHealth(0);
-	wagon.getCharacter(4)->setHealth(0);
-	wagon.groupStatus();
-	cout << "DEBUG" << endl;
-	wagon.checkDead();
-	wagon.groupStatus();
-	wagon.checkDead();
-	wagon.groupStatus();
-
-
-	return 0;
-}
-
-
-int bonk() {
 	//Seed Random one at the begining of the game
 	srand(time(NULL));
 	titleScreen();
@@ -49,7 +26,7 @@ int bonk() {
 	Group wagon;
 	for (int i = 1; i < userInput; ++i)
 	{
-		wagon.addCharacter();
+		wagon.people.push_back(Character(getString("Enter Name: ")));
 	}
 	while (wagon.getDistance() < wagon.getTarget()) {
 		try {
