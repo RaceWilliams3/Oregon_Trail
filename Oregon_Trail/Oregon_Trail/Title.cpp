@@ -1,12 +1,18 @@
 #include <iostream>
+#include <fstream>
+#include <string>
 
 using namespace std;
 
 void titleScreen()
 {
-	cout << "+-----------------------------------+" << endl;
-	cout << "|           Oregon Trail            |" << endl;
-	cout << "|                                   |" << endl;
-	cout << "| Race Williams     Matthew Shepard |" << endl;
-	cout << "+-----------------------------------+" << endl;
+	ifstream f("title.txt");
+	string line;
+	getline(f, line);
+	for (int i = 0; i < 17; i++) {
+		cout << line << endl;
+		getline(f, line);
+	}
+	
+	f.close();
 }
