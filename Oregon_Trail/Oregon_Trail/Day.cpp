@@ -73,19 +73,20 @@ void Day::travel()
 	int tDistance = 0;
 	switch (weather) {
 	case(0):
-		tDistance = randRange(50, 100);
-		wagon->setDistance(wagon->getDistance() + tDistance);
+		tDistance = randRange(25, 50);
 		break;
 	case(1):
-		tDistance = randRange(30, 60);
-		wagon->setDistance(wagon->getDistance() + tDistance);
+		tDistance = randRange(15, 30);
 		break;
 	case(2):
-		tDistance = randRange(10, 20);
-		wagon->setDistance(wagon->getDistance() + tDistance);
+		tDistance = randRange(5, 10);
 		break;
 	}
+	cout << "tDistance: " << tDistance << endl;
+	cout << "distance before adding tDistance: " << wagon->getDistance() << endl;
+	wagon->addDistance(tDistance);
 	cout << "You went " << tDistance << " miles." << endl;
+	cout << "Distance: " << wagon->getDistance() << endl;
 	int low = 0;
 	int high = 0;
 	switch (temp) {
