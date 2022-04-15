@@ -1,4 +1,5 @@
 #include <iostream>
+#include <Windows.h>
 #include <string>
 #include "Group.h"
 #include "Utility.h"
@@ -12,6 +13,8 @@ int main() {
 	//Seed Random one at the begining of the game
 	srand(time(NULL));
 	titleScreen();
+	bool mainMusic = PlaySound(TEXT("enigmatic.wav"), NULL, SND_ASYNC); //main game music
+	
 
 	int userInput;
 	cout << "How many characters are in the wagon?: ";
@@ -35,6 +38,11 @@ int main() {
 		}
 		catch (const char* x) {
 			cout << "ERROR: " << x << endl;
+		}
+		catch (string y)
+		{
+			cout << "Everyone is dead." << endl;
+			cout << "Truth is, the game was rigged from the start." << endl;
 		}
 		catch (int x)
 		{
