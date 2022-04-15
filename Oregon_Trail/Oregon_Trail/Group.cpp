@@ -54,6 +54,8 @@ void Group::groupStatus() {
 		cout << "Hunger: " << people[i].getHunger() << endl;
 		cout << "Health: " << people[i].getHealth() << endl;
 	}
+
+	cout << endl << "----------------------------" << endl;
 }
 
 

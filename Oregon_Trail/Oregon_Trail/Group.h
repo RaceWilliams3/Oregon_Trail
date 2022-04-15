@@ -39,7 +39,7 @@ public:
 	void setRations(int r) { rations = r; }
 	void groupStatus();
 	double getDistance() { return distance; }
-	void setDistance(double dist) { distance += dist; }
+	void addDistance(double dist) { distance += dist; }
 	int getTarget() { return targetMiles; }
 	void checkDead();
 };
