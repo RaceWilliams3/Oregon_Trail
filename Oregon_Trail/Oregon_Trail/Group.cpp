@@ -60,7 +60,7 @@ void Group::groupStatus() {
 void Group::checkDead() {
 	if (people.size() <= 0) {
 		cout << "Everyone is dead." << endl;
-		cout << "You failed" << endl;
+		cout << "Truth is, the game was rigged from the start." << endl;
 	}
 	else {
 		for (int i = 0; i < people.size(); i++) {

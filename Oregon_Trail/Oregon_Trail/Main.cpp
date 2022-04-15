@@ -36,6 +36,10 @@ int main() {
 		catch (const char* x) {
 			cout << "ERROR: " << x << endl;
 		}
+		catch (int x)
+		{
+			cout << "Congratulations! You get 1 point." << endl;
+		}
 	}
 	
 	return 0;

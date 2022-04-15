@@ -110,6 +110,11 @@ void Day::travel()
 	for (int i = 0; i < wagon->people.size(); i++) {
 		injuryChance(&wagon->people[i], 10, 5, 10, "traveling");
 	}
+
+	if (tDistance >= 2800)
+	{
+		throw(1);
+	}
 }
 
 void Day::hunt() {
@@ -183,7 +188,16 @@ void Day::action()
 			cin.ignore(INT_MAX, '\n');
 			cin >> userInput;
 		}
-
+		if (userInput == "status" || userInput == "Status")
+		{
+			wagon->groupStatus();
+			
+			cout << "Eat, Hunt, Rest or Travel?: ";
+			cin.clear();
+			cin.ignore(INT_MAX, '\n');
+			cin >> userInput;
+		}
+		
 		if (userInput == "eat" || userInput == "Eat")
 		{
 			Day::eat();
