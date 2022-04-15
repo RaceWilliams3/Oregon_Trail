@@ -13,7 +13,7 @@ int main() {
 	//Seed Random one at the begining of the game
 	srand(time(NULL));
 	titleScreen();
-	bool mainMusic = PlaySound(TEXT("enigmatic.wav"), NULL, SND_ASYNC); //main game music
+	bool mainMusic = PlaySound(TEXT("funky.wav"), NULL, SND_ASYNC); //main game music
 	
 
 	int userInput;
